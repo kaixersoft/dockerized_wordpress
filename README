@@ -1,0 +1,33 @@
+# Dockerized Wordpress
+_____________
+
+### Initial setup
+Create all containers required
+- RUN : 
+`docker-compose up -d`
+
+### Stop application
+Stop containers but preserve all changes made botn on files and database
+- RUN :
+`docker-compose stop`
+
+### Start application
+Start containers bringing back everything that was stop
+- RUN :
+`docker-compose start`
+
+### Destroy application
+Delete containers, network created and database.
+You will need todo initial setup again to bringup everything again
+- RUN :
+`docker-compose down`
+
+### Access your application
+> http://localhost
+
+### Access your MySql Database
+- host : 127.0.0.1
+- port : 3306
+- username : root
+- password : root
+- database name : wordpress
