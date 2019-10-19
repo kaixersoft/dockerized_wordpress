@@ -13,14 +13,22 @@ services:
      environment:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
-       WORDPRESS_DB_PASSWORD: my_wordpress_db_password
+       WORDPRESS_DB_PASSWORD: wp_user_pwd
+     networks:
+       - app_network
+   
+   phpymadmin:
+     depends_on:
+       - db
+     image: phpmyadmin/phpmyadmin
+     ports:
+       - "8080:80"       
+     restart: always
      networks:
        - app_network
 
    db:
      image: mysql:5.7
-     ports:
-       - "3306:3306"
      volumes:
        - mysql-storage:/var/lib/mysql
      restart: always
@@ -28,10 +36,10 @@ services:
        MYSQL_ROOT_PASSWORD: root
        MYSQL_DATABASE: wordpress
        MYSQL_USER: wordpress
-       MYSQL_PASSWORD: my_wordpress_db_password
+       MYSQL_PASSWORD: wp_user_pwd
      networks:
        - app_network
-networks:
+networks:  
   app_network:
 
 volumes:
